@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PCydia · Package Manager for Windows</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        header {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+        .icon {
+            width: 100px;
+            height: 100px;
+            border-radius: 22px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        .icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .header-text h1 {
+            font-size: 48px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        .header-text p {
+            font-size: 18px;
+            color: #666;
+        }
+        .badge {
+            display: inline-block;
+            background: #e9ecef;
+            padding: 5px 15px;
+            border-radius: 30px;
+            font-size: 14px;
+            color: #495057;
+            margin-top: 10px;
+        }
+        .badge span {
+            color: #667eea;
+            font-weight: bold;
+        }
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .card h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .feature-list {
+            list-style: none;
+        }
+        .feature-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 16px;
+        }
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+        .feature-list span {
+            color: #667eea;
+            font-weight: bold;
+        }
+        .download-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+            margin-top: 20px;
+            transition: transform 0.2s;
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+        .download-btn:hover {
+            transform: translateY(-2px);
+        }
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 30px 0;
+            text-align: center;
+        }
+        .stat-item {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            flex: 1;
+            margin: 0 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .stat-number {
+            font-size: 32px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .stat-label {
+            color: #666;
+            margin-top: 5px;
+        }
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .package-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        .package-card:hover {
+            transform: translateY(-5px);
+        }
+        .package-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+        .package-name {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .package-meta {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        .package-category {
+            display: inline-block;
+            background: #f0f2f5;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            color: #495057;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            color: white;
+        }
+        .footer a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+        }
+        .footer a:hover {
+            opacity: 1;
+        }
+        @media (max-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+            .stats {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="icon">
+                <img src="https://raw.githubusercontent.com/AlgorithmIntensity/PCydia/refs/heads/main/icon%20(1).png" alt="PCydia icon">
+            </div>
+            <div class="header-text">
+                <h1>PCydia</h1>
+                <p>goofy ahh package manager for Windows</p>
+                <div class="badge">
+                    <span>v1.0</span> · March 2026 · Open Source
+                </div>
+                <a href="https://github.com/AlgorithmIntensity/PCydia/releases" class="download-btn">⬇️ Download PCydia</a>
+            </div>
+        </header>
+
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-number">10+</div>
+                <div class="stat-label">Packages</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">4</div>
+                <div class="stat-label">Repositories</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">2026</div>
+                <div class="stat-label">First Release</div>
+            </div>
+        </div>
+
+        <div class="content-grid">
+            <div class="card">
+                <h2>📦 About PCydia</h2>
+                <p style="margin-bottom: 20px; line-height: 1.6;">
+                    PCydia is a lightweight package manager for Windows inspired by Cydia for iOS. 
+                    It allows you to easily install, update, and manage portable applications from custom repositories.
+                </p>
+                <ul class="feature-list">
+                    <li><span>✓</span> Simple and clean interface</li>
+                    <li><span>✓</span> Custom repositories support</li>
+                    <li><span>✓</span> Categories and search</li>
+                    <li><span>✓</span> Auto-install with .pconf files</li>
+                    <li><span>✓</span> Desktop shortcuts creation</li>
+                    <li><span>✓</span> Portable apps only (no registry)</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2>🚀 Quick Start</h2>
+                <ol style="margin-left: 20px; line-height: 2;">
+                    <li>Download and run PCydia.exe</li>
+                    <li>Go to Sources tab → Add Source</li>
+                    <li>Enter repository URL</li>
+                    <li>Click Refresh</li>
+                    <li>Browse and install packages</li>
+                </ol>
+                <div style="background: #f8f9fa; padding: 15px; border-radius: 10px; margin-top: 20px;">
+                    <code style="font-size: 14px;">📁 Apps installed to: Program Files\AlgorithmInt\PCydia\apps\</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>📥 Available Packages</h2>
+            <div class="packages-grid">
+                <div class="package-card">
+                    <div class="package-icon">🔧</div>
+                    <div class="package-name">Winaero Tweaker</div>
+                    <div class="package-meta">1.65 · 3.2 MB</div>
+                    <span class="package-category">System</span>
+                </div>
+                <div class="package-card">
+                    <div class="package-icon">🗜️</div>
+                    <div class="package-name">7-Zip</div>
+                    <div class="package-meta">24.09 · 1.6 MB</div>
+                    <span class="package-category">Utility</span>
+                </div>
+                <div class="package-card">
+                    <div class="package-icon">🦊</div>
+                    <div class="package-name">Firefox</div>
+                    <div class="package-meta">136.0 · 0.5 MB</div>
+                    <span class="package-category">Browser</span>
+                </div>
+                <div class="package-card">
+                    <div class="package-icon">⬇️</div>
+                    <div class="package-name">34Downloader</div>
+                    <div class="package-meta">1.0 · 8.2 MB</div>
+                    <span class="package-category">Utility</span>
+                </div>
+                <div class="package-card">
+                    <div class="package-icon">🔍</div>
+                    <div class="package-name">Everything</div>
+                    <div class="package-meta">1.4.1 · 1.9 MB</div>
+                    <span class="package-category">Utility</span>
+                </div>
+                <div class="package-card">
+                    <div class="package-icon">🎮</div>
+                    <div class="package-name">Steam</div>
+                    <div class="package-meta">2.10.91 · 2.3 MB</div>
+                    <span class="package-category">Gaming</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>
+                <a href="https://github.com/AlgorithmIntensity/PCydia">GitHub</a> · 
+                <a href="https://github.com/AlgorithmIntensity/PCydia/issues">Issues</a> · 
+                <a href="https://github.com/AlgorithmIntensity/PCydia/releases">Releases</a>
+            </p>
+            <p style="margin-top: 20px; opacity: 0.6;">© 2026 AlgorithmIntensity · goofy ahh cydia for pc</p>
+        </div>
+    </div>
+</body>
+</html>
