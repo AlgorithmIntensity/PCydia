@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>PayloadContent</key>
+    <array>
+        <dict>
+            <key>FullScreen</key>
+            <true/>
+            <key>Icon</key>
+            <data>
+            <!-- Base64 icon data - вставь сюда иконку в base64 -->
+            </data>
+            <key>IsRemovable</key>
+            <true/>
+            <key>Label</key>
+            <string>PCydia</string>
+            <key>PayloadDescription</key>
+            <string>PCydia Package Manager for Windows</string>
+            <key>PayloadDisplayName</key>
+            <string>PCydia Web Clip</string>
+            <key>PayloadIdentifier</key>
+            <string>com.algorithmintensity.pcydia.webclip</string>
+            <key>PayloadType</key>
+            <string>com.apple.webClip.managed</string>
+            <key>PayloadUUID</key>
+            <string>PCYDIA-1234-5678-90AB-CDEF12345678</string>
+            <key>PayloadVersion</key>
+            <integer>1</integer>
+            <key>Precomposed</key>
+            <true/>
+            <key>URL</key>
+            <string>https://github.com/AlgorithmIntensity/PCydia</string>
+        </dict>
+    </array>
+    <key>PayloadDescription</key>
+    <string>Adds PCydia shortcut to home screen</string>
+    <key>PayloadDisplayName</key>
+    <string>PCydia Home Screen Shortcut</string>
+    <key>PayloadIdentifier</key>
+    <string>com.algorithmintensity.pcydia</string>
+    <key>PayloadOrganization</key>
+    <string>AlgorithmIntensity</string>
+    <key>PayloadRemovalDisallowed</key>
+    <false/>
+    <key>PayloadType</key>
+    <string>Configuration</string>
+    <key>PayloadUUID</key>
+    <string>GLOBAL-1234-5678-90AB-CDEF12345678</string>
+    <key>PayloadVersion</key>
+    <integer>1</integer>
+</dict>
+</plist>
